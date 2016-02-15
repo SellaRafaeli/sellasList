@@ -2,15 +2,15 @@ require 'bundler'
 Bundler.require
 require './setup'
 
-PUBLIC_USER_FIELDS = [:city,:one_liner,:public_email]
+PUBLIC_USER_FIELDS = [:name,:email,:city,:description,:contact]
 
 get '/' do
   erb :index
 end
  
-get '/users' do
-  erb :users
-end
+# get '/users' do
+#   erb :users
+# end
 
 get '/me' do
   erb :me

@@ -1,15 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body style='text-align: center'>
+
+<%
+  cur_user_email = session[:user_id] && $users.find(_id: session[:user_id]).first['email'] rescue false
+%>
 <header>
   <a href="/">home</a>
-  <% if session[:user_id] %><a href="/me">me</a><% end %>
+  <% if cur_user_email %>
+    <a href="/me">me (<%=cur_user_email%>)</a> | <a href="signout">sign out </a> 
+  <% else %>
+    <a href="signup">sign up </a>
+  <% end %>
 </header>
 
 <%= yield %>
 
-<footer>
-  <a href="users">all users</a> | 
-  <% if session[:user_id] %>
-    <a href="signout">Sign out </a> 
-  <% else %>
-    <a href="signup">Sign up </a>
-  <% end %>
+<footer>  
 </footer>
+
+</body>
+</html>

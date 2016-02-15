@@ -1,0 +1,15 @@
+<header>
+  <a href="/">home</a>
+  <% if session[:user_id] %><a href="/me">me</a><% end %>
+</header>
+
+<%= yield %>
+
+<footer>
+  <a href="users">all users</a> | 
+  <% if session[:user_id] %>
+    <a href="signout">Sign out </a> 
+  <% else %>
+    <a href="signup">Sign up </a>
+  <% end %>
+</footer>

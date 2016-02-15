@@ -2,23 +2,45 @@ require 'bundler'
 Bundler.require
 require './setup'
 
-#functions
-def view_tasks(tasks = nil)  
-  erb(:view, {locals: {tasks: $tasks.find.to_a}})
-end
+PUBLIC_USER_FIELDS = [:city,:one_liner,:public_email]
 
 get '/' do
-  view_tasks
+  erb :index
+end
+ 
+get '/users' do
+  erb :users
 end
 
-post '/add' do
-  $tasks.insert({name: params[:task_name], description: params[:task_description]})  
-  view_tasks
+get '/me' do
+  erb :me
 end
 
-get '/delete' do
-  $tasks.remove({name: params[:task_name]})
-  view_tasks
+post '/me' do
+  $users.update_one({_id: session[:user_id]},{"$set": params})
+  erb :me
 end
 
-puts "Server is now running."
+get '/signup' do
+  erb :signup
+end
+
+post '/signup' do
+  email = params[:email]  
+
+  if $users.find(email: email).count > 0
+    erb :index 
+  else 
+    id  = BSON::ObjectId.new.to_s    
+    res = $users.insert_one(_id: id, email: email)
+    session[:user_id] = id
+    erb :index
+  end
+end
+
+get '/signout' do
+  session.clear
+  erb :index
+end
+
+puts "SellasList is now running."

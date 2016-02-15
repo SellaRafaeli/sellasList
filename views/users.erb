@@ -1,0 +1,25 @@
+<h3> all da users </h3>
+
+<%
+  users = $users.find.to_a
+%>
+
+<style>
+  td {
+    border:1px solid maroon;
+  }
+</style>
+<table class='usersTable'>
+  <tr>
+    <% PUBLIC_USER_FIELDS.each do |field| %>
+    <th><%=field%></th>
+    <% end %>
+  </tr>
+  <% users.each do |user| %>
+  <tr>
+    <% PUBLIC_USER_FIELDS.each do |field| %>
+    <td><%=user[field]%></td>
+    <% end %>
+  </tr>
+  <% end%>
+</table>

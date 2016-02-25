@@ -17,6 +17,7 @@ def format_obj(obj, type = nil)
   case type.to_sym
   when :users then obj.just('username')
   when :posts then obj.just('slug')
+  else obj
   end
 end
 
@@ -26,6 +27,8 @@ def get_crit(params, type = nil)
   case type.to_sym
   when :users then params.just(WHITE_FIELDS)
   when :posts then {num_likes: {"$gt": 10}}
+  when :likes then {}
+  else {nothing: true} #dont search
   end
 end
 
@@ -43,12 +46,16 @@ def get_mongo_data(params, type)
   return coll, crit, opts
 end
 
-get '/:coll/?:id?' do   
+def get_items(params)
   type             = params[:coll]
   coll, crit, opts = get_mongo_data(params, type)  
   items, done      = page_mongo(coll, crit, opts)
   formatted_items  = items.map {|i| format_obj(i, type)}
-  {data: formatted_items, done: done}
+  {items: formatted_items, done: done}
+end
+
+get '/:coll/?:id?' do   
+  get_items(params)
 end
 
 post '/:coll/:id' do 

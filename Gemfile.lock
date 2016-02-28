@@ -37,6 +37,7 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    require_all (1.3.3)
     ripl (0.7.1)
       bond (~> 0.5.1)
     ripl-multi_line (0.3.1)
@@ -77,6 +78,7 @@ DEPENDENCIES
   json
   mongo (~> 2.1.0)
   pry-byebug (= 2.0.0)
+  require_all
   sinatra
   sinatra-contrib
   sinatra-reloader

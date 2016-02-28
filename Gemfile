@@ -9,3 +9,4 @@ gem 'json'
 gem 'pry-byebug',           '2.0.0' # binding.pry for breakpoints
 gem 'tux'
 gem 'activesupport',        '4.0.0' # utility functions like hash.slice
+gem 'require_all'

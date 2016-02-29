@@ -1,4 +1,4 @@
-# usage: ruby spec/mobile_spec.rb prod 
+# usage: bundle exec ruby spec/spec.rb 
 puts "Running spec."
 start = Time.now
 env   = ARGV[0] 
@@ -24,11 +24,10 @@ def expected_results(idx, res)
   success = case idx
   when :ping         
     res['pong'] == true
-  when :create_user  
-    puts res  
-    res['item']['username'] == NEW_USERNAME_1
+  when :create_user 
+    res['item']['username'] == NEW_USERNAME_1 
   when :get_existing_user
-    res['items'][0]['_id'] == EXISTING_USER_ID
+    res['items'][0]['_id']  == EXISTING_USER_ID
   when :update_user
     res['item']['username'] == OTHER_USERNAME
   else
@@ -38,11 +37,9 @@ def expected_results(idx, res)
 rescue => e 
 end
 
-test_cases = tests.keys
-test_cases = Array(test_cases)
+test_cases = Array(tests.keys)
 
-opts = {}
 test_cases.each do |idx| 
-  test_response(tests, idx, :expected_results, opts)
+  test_response(tests, idx, :expected_results, {})
 end
 puts "took #{Time.now-start} seconds."

@@ -1,12 +1,12 @@
-def ensure_unique
-  @unique_fields.each do |field| 
+def stop_if_exists_by(fields)
+  fields.each do |field| 
     val = params[field]
     halt_item_exists(field, val) if get_single_item(field => val)    
   end
 end
 
 def create_item(params)   
-  ensure_unique
+  stop_if_exists_by(@unique_fields)
 
   white_fields   = params.just(@allowed_fields)
   

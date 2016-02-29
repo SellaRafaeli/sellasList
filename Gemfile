@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'sinatra-reloader'
 gem 'mongo', '~> 2.1.0'
 gem 'bson_ext'
 gem 'json'
@@ -14,6 +13,8 @@ gem 'httpclient',           '2.5.2'
 
 
 group :development, :test do
+  gem 'shotgun'
+  gem 'sinatra-reloader'
   gem 'colorize' 
   gem 'faker' 
 end

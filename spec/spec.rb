@@ -11,7 +11,7 @@ require 'colorize'
 
 puts "Loaded colorize. Hope for the best.".green
 NEW_USERNAME_1   = Faker::Name.name
-EXISTING_USER_ID = 'users_56d412709ece07c69b000003'
+EXISTING_USER_ID = 'evq3bpg'
 OTHER_USERNAME   = Faker::Name.name
 tests = {
 #  :ping => [GET, '/ping', {}],

@@ -2,16 +2,13 @@ class Mongo::Collection
 
   MAX_SLUG_SIZE = 200 #arbitrary, just to keep it decent
 
-  #get/find_by/find_one('id123')
-  #get/find_by/find_one({email: 'bob@gmail.com'})
-  #get/find_by/find_one('bob@gmail.com', 'email')
+  #get('id123') || get(email: 'bob@gmail.com')
   def find_one(params, field = :_id)
     return nil if params.nil? #to avoid mistakes      
     return self.find(params).first if params.is_a? Hash
 
     find_one((field.to_s) => params)
   end
-  alias_method :find_by, :find_one
   alias_method :get, :find_one
 
   def find_all(params = {})
@@ -82,6 +79,10 @@ class Mongo::Collection
   end
 
   def nice_id
-    self.name + "_" + BSON::ObjectId.new.to_s
+    #return BSON::ObjectId.new.to_s
+    #return self.name + "_" + BSON::ObjectId.new.to_s
+    #return BSON::ObjectId.new.to_s.to_i(16).base62_encode #.base62_decode to reverse 
+    #return rand(Time.now.to_i*100).to_s(36)
+    SecureRandom.urlsafe_base64(7,false)
   end
 end #end Mongo class 

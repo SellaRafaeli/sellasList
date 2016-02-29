@@ -14,8 +14,3 @@ end
 def time(&block) #to call: time { get '/u/ann-oates' }
   before = Time.now; yield; puts "Took: #{Time.now-before}"
 end
-
-def nice_id
-  unique_id = BSON::ObjectId.new.to_s
-  unique_id
-end

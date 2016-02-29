@@ -2,7 +2,6 @@ before do
   @foo = :bar
   @time_started = Time.now  
   get_request_data  
-  
 end
 
 after do 
@@ -17,18 +16,23 @@ def model_config(type)
   CONFIG[type.downcase.to_sym]
 end
 
+def required_fields 
+  @config[:required_fields] || []
+end
+
 def missing_fields
-  @config[:required_fields] - params.keys
+  required_fields - params.keys
 end
 
 def get_request_data
   @method       = request.env["REQUEST_METHOD"]
   @type         = request.path_info.split("/")[1]
-  @config       = model_config(@type)[@method.downcase.to_sym]
+  @config       = model_config(@type) && model_config(@type)[@method.downcase.to_sym]
 
   if @config
-    @coll         = $mongo.collection(@type)
-    halt(403, {msg: "Missing fields: #{missing_fields.join(",")}"}) if missing_fields
-    x=1
+    @coll          = $mongo.collection(@type)
+    halt_missing_fields(missing_fields) if missing_fields.any?    
+    @allowed_fields= @config[:allowed_fields]
+    @unique_fields = @config[:unique_fields]
   end
 end

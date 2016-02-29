@@ -10,3 +10,10 @@ gem 'pry-byebug',           '2.0.0' # binding.pry for breakpoints
 gem 'tux'
 gem 'activesupport',        '4.0.0' # utility functions like hash.slice
 gem 'require_all'
+gem 'httpclient',           '2.5.2'
+
+
+group :development, :test do
+  gem 'colorize' 
+  gem 'faker' 
+end

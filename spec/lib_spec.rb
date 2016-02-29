@@ -3,8 +3,9 @@ require './app'
 # comm
 $http = HTTPClient.new
 $base_url = 'http://localhost:9393'
-GET = :get
-POST = :post
+GET  = :GET
+POST = :POST
+PUT  = :PUT 
 
 def full_route(relative_route)
   "#{$base_url}#{relative_route}"
@@ -30,6 +31,14 @@ def post_raw(route, params = {})
   @last_res = ($http.post full_route(route), params)
 end
 
+def put_request(route, params = {})
+  @last_res = parse_http_response (put_raw(route, params))
+end
+
+def put_raw(route, params = {})
+  @last_res = ($http.put full_route(route), params)
+end
+
 def last_res 
   @last_res
 end
@@ -39,7 +48,7 @@ def assert(cond, msg = "<msg missing>")
   $assert_counter += 1
   line = cond ? msg.green : "*** Failed *** on #{msg}".red
   line = "[#{$assert_counter}] #{line}"
-  puts line
+  puts line[0..280]
   #puts ("---")
 end
 
@@ -52,7 +61,13 @@ def test_response(tests, idx, success_test_method, opts = {})
   params    = data[2]
   params    = params.to_h.merge(opts[:extra_params] || {})
   
-  res = (method == GET) ? get_request(route, params) : post_request(route, params)
+  if (method == PUT) 
+    res = put_request(route, params) 
+  elsif (method == GET) 
+    res = get_request(route, params)
+  elsif (method == POST) 
+    res = post_request(route, params)
+  end
 
   success = method(success_test_method).call(idx, res)
   

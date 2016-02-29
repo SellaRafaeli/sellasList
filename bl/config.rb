@@ -1,22 +1,22 @@
-CONFIG = {
-  users: {
-      name: :users,
-      put: {
-        allowed_fields: ['name','email','age','username'],
-        required_fields: ['name','email'],
-        unique_fields: ['email']
-      },
-      get: {
-        allowed_fields: ['email','foo'],
-      }
-    },
-  get: {
+# CONFIG = {
+#   users: {
+#       name: :users,
+#       put: {
+#         allowed_fields: ['name','email','age','username'],
+#         required_fields: ['name','email'],
+#         unique_fields: ['email']
+#       },
+#       get: {
+#         allowed_fields: ['email','foo'],
+#       }
+#     },
+#   get: {
 
-  },
-  posts: {
+#   },
+#   posts: {
 
-    },
-  comments: {
+#     },
+#   comments: {
 
-  }
-}
+#   }
+# }

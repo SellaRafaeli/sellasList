@@ -1,13 +1,6 @@
 def get_crit(params, type = nil)
   return {_id: params[:id]} if params[:id]
-
   return params.just(@allowed_fields)
-  # case type.to_sym
-  # when :users then params.just(WHITE_FIELDS)    
-  # when :posts then {num_likes: {"$gt": 10}}
-  # when :likes then {}
-  # else {nothing: true} #dont search
-  # end
 end
 
 def get_mongo_data(params, type)

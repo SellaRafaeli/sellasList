@@ -8,13 +8,13 @@ end
 def create_item(params)   
   ensure_unique
 
-  white_params      = params.just(@allowed_fields)
+  white_fields   = params.just(@allowed_fields)
   
-  new_obj           = @coll.add(white_params)
+  new_item          = @coll.add(white_fields)
   
-  formatted_new_obj = format_obj(new_obj, @type)
+  formatted_item    = format_obj(new_item, @type)
   
-  {success: true, new_obj: formatted_new_obj}
+  {item: formatted_item}
 rescue => e
   halt_error(e.to_s)
 end

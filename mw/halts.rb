@@ -1,5 +1,5 @@
 def halt_missing_fields(fields)
-  halt(403, {msg: "Missing fields: #{missing_fields.join(",")}"}) 
+  halt(403, {msg: "Missing fields: #{fields.join(",")}"}) 
 end
 
 def halt_item_exists(field, val = nil)

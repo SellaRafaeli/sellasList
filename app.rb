@@ -1,7 +1,7 @@
 puts "starting app..."
 
 require 'bundler'
-#require 'active_support/core_ext'
+require 'active_support/core_ext'
 
 puts "requiring gems..."
 Bundler.require
@@ -17,31 +17,24 @@ get '/ping' do
   {msg: 'pong from BEAPI', pong: true}
 end
 
-post '/test' do
-  {params: params}
-end
-
 require_all './bl'
 
 CONFIG = {
   users: {
       name: :users,
+      fields: ['name','email','age','username'],
+      allowed_fields: ['name','email','age','username'],      
+      unique_fields: ['email'],
+      
       put: {
-        allowed_fields: ['name','email','age','username'],
-        required_fields: ['name','email'],
-        unique_fields: ['email']
+        required_fields: ['name','email','username'],
       },
       get: {
-        allowed_fields: ['email','foo'],
       }
-    },
-  get: {
-
-  },
-  posts: {
-
+      
     },
   comments: {
 
   }
 }
+

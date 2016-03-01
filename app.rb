@@ -2,6 +2,7 @@ puts "starting app..."
 
 require 'bundler'
 require 'active_support/core_ext'
+require 'sinatra/reloader' #dev-only
 
 puts "requiring gems..."
 Bundler.require
@@ -13,9 +14,8 @@ require './my_lib'
 require_all './db'
 require_all './mw'
 
-
 get '/ping' do
-  {msg: 'pong from BEAPI', pong: true}
+  {msg: '123 pong from BEAPI', pong: true}
 end
 
 require_all './bl'

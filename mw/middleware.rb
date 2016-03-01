@@ -18,7 +18,7 @@ end
 
 def get_request_data
   @method       = request.env["REQUEST_METHOD"]
-  @type         = request.path_info.split("/")[1]
+  @type         = request.path_info.split("/")[2]
   if model_config(@type)
     @config = model_config(@type)
     @method_config   = @config[@method.downcase.to_sym] || {}    

@@ -11,7 +11,7 @@ def update_item(params)
   {item: res}
 end
 
-post '/:coll/:id' do #update 
+post '/api/:coll/:id' do #update 
   @id = params[:id]
   update_item(params)
 end

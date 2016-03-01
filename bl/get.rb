@@ -30,6 +30,6 @@ def get_single_item(params)
 end
 
 # 
-get '/:coll/?:id?' do #read 
+get '/api/:coll/?:id?' do #read 
   get_items(params)
 end

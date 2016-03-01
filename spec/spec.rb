@@ -15,9 +15,9 @@ EXISTING_USER_ID = 'evq3bpg'
 OTHER_USERNAME   = Faker::Name.name
 tests = {
 #  :ping => [GET, '/ping', {}],
-  :create_user => [PUT, '/users', {_method: 'put', name: Faker::Name.name, email: Faker::Internet.email, username: NEW_USERNAME_1}],
-  :get_existing_user => [GET, "/users/#{EXISTING_USER_ID}", {}],
-  :update_user => [POST, "/users/#{EXISTING_USER_ID}",{username: OTHER_USERNAME}]
+  :create_user => [PUT, '/api/users', {_method: 'put', name: Faker::Name.name, email: Faker::Internet.email, username: NEW_USERNAME_1}],
+  :get_existing_user => [GET, "/api/users/#{EXISTING_USER_ID}", {}],
+  :update_user => [POST, "/api/users/#{EXISTING_USER_ID}",{username: OTHER_USERNAME}]
 }
 
 def expected_results(idx, res)

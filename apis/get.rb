@@ -1,6 +1,16 @@
+def add_crit(crit,k,v)
+  if k.to_sym == :mongo_crit_json
+    crit.merge!(JSON.parse(v))
+  else 
+    crit[k] = v
+  end
+end
+
 def get_crit(params, type = nil)
   return {_id: params[:id]} if params[:id]
-  return params.just(@allowed_fields)
+  crit = {}
+  params.just(@allowed_fields).each { |k,v| add_crit(crit,k,v) }
+  crit
 end
 
 def get_mongo_data(params, type)

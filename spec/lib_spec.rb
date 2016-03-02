@@ -1,11 +1,16 @@
-require './app'
-
+#require './app'
+Bundler.require
 # comm
-$http = HTTPClient.new
+#$http = HTTPClient.new
+$http = RestClient
 $base_url = 'http://localhost:9393'
 GET  = :GET
 POST = :POST
 PUT  = :PUT 
+
+def bp
+  binding.pry
+end
 
 def full_route(relative_route)
   "#{$base_url}#{relative_route}"
@@ -20,14 +25,14 @@ def get_request(route, params = {})
 end
 
 def get_raw(route, params = {})
-  @last_res = $http.get full_route(route), params
+  @last_res = $http.get full_route(route), params: params
 end
 
 def post_request(route, params = {})
   @last_res = parse_http_response (post_raw(route, params))
 end
 
-def post_raw(route, params = {})
+def post_raw(route, params = {})  
   @last_res = ($http.post full_route(route), params)
 end
 

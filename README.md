@@ -1,4 +1,4 @@
-This is a backend API.
+This is a backend API. See http://www.sellarafaeli.com/blog/baas.html.
 
 Tactical Ideas:
 - in 'before' log the 'request' details to a 'requests' log. Also save the request id.
@@ -12,17 +12,7 @@ Tactical Ideas:
   - by defaulat the unique_fields should be empty
 - test everything....
 
-Strategic Ideas: 
-- The idea is make the process of creating an API / BE / Server as easy as possible.
-- Monetization options:
-  1. Host their backend
-  2. Spin it off as a separate Heroku instance, give them control. 
-     - this can be done even if hosting; will allow for separate CPU / DB, s.t. one request does not throttle the others
-     - this might make it impossible / harder to introduce code changes to affect everyone 
-  3. Let humans (non-devs) build it.
-  4. Open-Source it
-
-1. Open-Source it.
-2. Host it.
-3. Deliver it as a product. 
-4. Let humans build it for you. 
+Steps:
+1. Create an API that works from a config file.
+2. Create a mechanism to create that config file.
+3. Create a mechanism to deploy a heroku app using said config file. 

@@ -13,12 +13,13 @@ require './my_lib'
 
 require_all './db'
 require_all './mw'
+require_all './bl'
 
 get '/ping' do
   {msg: '123 pong from BEAPI', pong: true}
 end
 
-require_all './bl'
+require_all './apis'
 
 CONFIG = {
   users: {
@@ -33,6 +34,10 @@ CONFIG = {
   },
 
   posts: {  
+    fields: ['user_id','text'],
+    put: {
+      required_fields: ['user_id','text']
+    }
   }
 }
 
